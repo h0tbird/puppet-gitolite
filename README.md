@@ -1,4 +1,4 @@
-puppet-gitolite
-===============
+puppet-gito
+===========
 
 Manages the gitolite service
