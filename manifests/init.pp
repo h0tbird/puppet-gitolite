@@ -7,6 +7,6 @@ class gitolite (
 
 ) {
 
-  contains "${module_name}::install"
-  contains "${module_name}::config"
+  contain "${module_name}::install"
+  contain "${module_name}::config"
 }
