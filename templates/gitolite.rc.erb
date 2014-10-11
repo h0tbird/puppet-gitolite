@@ -31,6 +31,10 @@
     GIT_CONFIG_KEYS                 =>  '',
 <% end -%>
 
+<% if @gitweb_projects_list -%>
+    GITWEB_PROJECTS_LIST            =>  '<%= @gitweb_projects_list %>',
+<% end -%>
+
     # comment out if you don't need all the extra detail in the logfile
     LOG_EXTRA                       =>  1,
     # syslog options
@@ -81,6 +85,10 @@
         # called "local" in your gitolite-admin repo.  For a SECURITY WARNING
         # on this, see http://gitolite.com/gitolite/cust.html#pushcode
         # LOCAL_CODE                =>  "$rc{GL_ADMIN_BASE}/local",
+
+<% if @local_code -%>
+          LOCAL_CODE                =>  "<%= @local_code %>",
+<% end -%>
 
     # ------------------------------------------------------------------
 
@@ -162,10 +170,14 @@
 
             # updates 'description' file instead of 'gitweb.description' config item
             # 'cgit',
-
+            <% if @cgit -%>
+              'cgit',
+            <% end -%>
             # allow repo-specific hooks to be added
             # 'repo-specific-hooks',
-
+            <% if @cgit -%>
+              'repo-specific-hooks',
+            <% end -%>
         # performance, logging, monitoring...
 
             # be nice
