@@ -34,9 +34,10 @@ class gitolite::install inherits gitolite {
   } ->
 
   exec { 'gitolite_setup':
-    command  => "gitolite setup -pk ${git_admin}.pub",
-    provider => 'shell',
-    cwd      => "/home/${git_user}",
-    creates  => "/home/${git_user}/.gitolite",
+    command     => "gitolite setup -pk ${git_admin}.pub",
+    provider    => 'shell',
+    environment => ["HOME=/home/${git_user}"],
+    cwd         => "/home/${git_user}",
+    creates     => "/home/${git_user}/.gitolite",
   }
 }
