@@ -13,24 +13,31 @@ class gitolite::install inherits gitolite {
     gid        => $git_user,
     groups     => 'gitolite3',
     home       => "/home/${git_user}",
-    managehome => true,
+    managehome => false,
     shell      => '/bin/bash',
     require    => Package['gitolite3'],
   } ->
 
-  file { "/home/${git_user}/gitolite.key.pub":
-    ensure  => present,
-    content => $ssh_key,
-    owner   => $git_user,
-    group   => $git_user,
-    mode    => '0640',
-  } ->
+  file {
 
-  file { "/home/${git_user}/${git_admin}.pub":
-    ensure => link,
-    target => "/home/${git_user}/gitolite.key.pub",
-    owner  => $git_user,
-    group  => $git_user,
+    "/home/${git_user}":
+      ensure => directory,
+      owner  => $git_user,
+      group  => $git_user,
+      mode   => '0700';
+
+    "/home/${git_user}/gitolite.key.pub":
+      ensure  => present,
+      content => $ssh_key,
+      owner   => $git_user,
+      group   => $git_user,
+      mode    => '0640';
+
+    "/home/${git_user}/${git_admin}.pub":
+      ensure => link,
+      target => "/home/${git_user}/gitolite.key.pub",
+      owner  => $git_user,
+      group  => $git_user;
   } ->
 
   exec { 'gitolite_setup':
