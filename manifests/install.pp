@@ -14,7 +14,7 @@ class gitolite::install inherits gitolite {
     groups     => 'gitolite3',
     home       => "/home/${git_user}",
     managehome => true,
-    shell      => '/sbin/nologin',
+    shell      => '/bin/bash',
     require    => Package['gitolite3'],
   } ->
 
