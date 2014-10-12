@@ -47,5 +47,15 @@ class gitolite::install inherits gitolite {
     environment => ["HOME=/home/${git_user}"],
     cwd         => "/home/${git_user}",
     creates     => "/home/${git_user}/.gitolite",
+  } ->
+
+  file { [
+    "/home/${git_user}/.gitolite/local",
+    "/home/${git_user}/.gitolite/local/hooks",
+    "/home/${git_user}/.gitolite/local/hooks/repo-specific" ]:
+      ensure => directory,
+      owner  => $git_user,
+      group  => $git_user,
+      mode   => '0700',
   }
 }
