@@ -10,14 +10,6 @@ class gitolite::config inherits gitolite {
       mode    => '0644',
       notify  => Service['gitolite'];
 
-    '/usr/bin/gitolite-bootstrap':
-      ensure  => present,
-      content => template("${module_name}/gitolite-bootstrap.erb"),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      notify  => Service['gitolite'];
-
     "/home/${git_user}/.gitolite.rc":
       ensure  => present,
       content => template("${module_name}/gitolite.rc.erb"),
