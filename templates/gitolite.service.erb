@@ -1,0 +1,9 @@
+[Unit]
+Description=gitolite
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+KillMode=none
+User=git
+ExecStart=/usr/bin/gitolite-bootstrap
