@@ -49,30 +49,13 @@ class gitolite::install inherits gitolite {
     creates     => "/home/${git_user}/.gitolite",
   } ->
 
-  file {
-
-    [ "/home/${git_user}/.gitolite/local",
+  file { [
+    "/home/${git_user}/.gitolite/local",
     "/home/${git_user}/.gitolite/local/hooks",
     "/home/${git_user}/.gitolite/local/hooks/repo-specific" ]:
       ensure => directory,
       owner  => $git_user,
       group  => $git_user,
-      mode   => '0700';
-
-    '/etc/systemd/system/gitolite.service':
-      ensure  => present,
-      content => template("${module_name}/gitolite.service.erb"),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      notify  => Service['gitolite'];
-
-    '/usr/bin/gitolite-bootstrap':
-      ensure  => present,
-      content => template("${module_name}/gitolite-bootstrap.erb"),
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      notify  => Service['gitolite'];
+      mode   => '0700',
   }
 }
