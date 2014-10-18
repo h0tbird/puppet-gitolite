@@ -6,5 +6,6 @@ Type=oneshot
 RemainAfterExit=yes
 KillMode=none
 User=git
-ExecStart=/usr/bin/gitolite-bootstrap
+ExecStart=cd /home/git/repositories/gitolite-admin.git
+ExecStart=GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) hooks/post-update refs/heads/master
 ExecStop=/bin/true
