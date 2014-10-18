@@ -6,6 +6,7 @@ Type=oneshot
 RemainAfterExit=yes
 KillMode=none
 User=git
-ExecStart=cd /home/git/repositories/gitolite-admin.git
-ExecStart=GL_LIBDIR=$(gitolite query-rc GL_LIBDIR) hooks/post-update refs/heads/master
+WorkingDirectory=/home/git/repositories/gitolite-admin.git
+Environment="GL_LIBDIR=/usr/share/gitolite3/lib"
+ExecStart=/home/git/repositories/gitolite-admin.git/hooks/post-update refs/heads/master
 ExecStop=/bin/true
